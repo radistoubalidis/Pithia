@@ -17,7 +17,7 @@ public class Grammateia implements validateCorrectiveGrade{
     }
 
     @Override
-    public void getCorrectiveGrade(int AM, Mathima mathima) {
+    public void getCreateCorrectiveGrade(int AM, Mathima mathima) {
 
     }
 }
