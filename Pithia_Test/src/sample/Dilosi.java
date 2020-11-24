@@ -15,6 +15,17 @@ public class Dilosi {
     }
 
 
+    
+    public Mathima [] getCourses(int AM) {
+        if(AM == this.foititis.getAM()){
+            return mathimata;
+            break;
+        }
+        else return null;
+        
+    }
+    
+    
     public char getAkadEksam() {
         return akadEksam;
     }
