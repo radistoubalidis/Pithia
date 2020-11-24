@@ -28,8 +28,8 @@ public class Kathigitis implements CorrectiveGrade{
 
 
     @Override
-    public void CreateCorrectiveGrade(int AM, Mathima Mathima) {
-
+    public void CreateCorrectiveGrade(int AM, Mathima Mathima , float newGrade) {
+        // code 
     }
 
 
