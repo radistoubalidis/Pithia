@@ -29,10 +29,10 @@
    <bottom>
       <AnchorPane prefHeight="115.0" prefWidth="800.0" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="ypobolhButton" layoutX="566.0" layoutY="24.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="195.0" text="ΟΡΙΣΤΙΚΟΠΟΙΗΣΗ" />
-            <Text fx:id="ypobolhMessage" layoutX="415.0" layoutY="79.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="370.13671875">
+            <Button fx:id="ypobolhButton" layoutX="569.0" layoutY="-3.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="195.0" text="ΟΡΙΣΤΙΚΟΠΟΙΗΣΗ" />
+            <Text fx:id="newGradeSaved" layoutX="387.0" layoutY="60.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="376.13671875">
                <font>
-                  <Font size="16.0" />
+                  <Font size="18.0" />
                </font>
             </Text>
          </children>
