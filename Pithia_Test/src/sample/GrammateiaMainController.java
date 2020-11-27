@@ -26,6 +26,12 @@ public class GrammateiaMainController {
         return welcomeMessage;
     }
 
+    @FXML
+    private Text newGradeSaved;
+
+    public Text getNewGradeSaved() {
+        return newGradeSaved;
+    }
 
     @FXML
     private Button ypobolhButton;

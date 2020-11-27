@@ -6,7 +6,10 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+
+
 import java.util.ArrayList;
+import java.util.Iterator;
 
 
 public class Main extends Application {
@@ -37,6 +40,9 @@ public class Main extends Application {
     };
 
 
+    public ArrayList<Mathima> mathimataList = new ArrayList<Mathima>();
+    public ArrayList<Dilosi> diloseisList = new ArrayList<Dilosi>();
+
     Foititis [] foitites =  {
             new Foititis(101,"Ραδης Τουμπαλιδης","it101@it.teithe.gr"),
             new Foititis(102 ,"Βασιλης Κωνσταντινιδης","it102@it.teithe.gr"),
@@ -44,6 +50,8 @@ public class Main extends Application {
             new Foititis(104 ,"Gerald Culai","it104@it.teithe.gr"),
             new Foititis(105,"Δημοσθενης Σθεναρος","it105@it.teithe.gr")
     };
+
+
 
 
 
@@ -57,8 +65,8 @@ public class Main extends Application {
     };
 
 
-     float[]  vathmoi = {4,4,3,3,3};
-     float[]  vathmoi_null = null;
+     float[]  vathmoi = {4,4,3,3,3,3};
+     float[]  vathmoi_null = {0,0,0,0,0,0};
 
     Dilosi [] diloseis = {
             new Dilosi(foitites[0],mathimata,'9', vathmoi),
@@ -77,7 +85,18 @@ public class Main extends Application {
 
         window = primaryStage;
 
+
+
         //  DATA
+
+        for(int i =0 ; i< diloseis.length;i++){
+            diloseisList.add(diloseis[i]);
+        }
+
+        for(int i=0 ;i < mathimata.length ; i++){
+            mathimataList.add(mathimata[i]);
+        }
+
         grammateia.getAitiseis().add("from:"+kathigites[0].getName()+",in:"+mathimata[4].getTitle()+",for:"+foitites[0].getName()+",Grade:"+8.6);
         grammateia.getAitiseis().add("from:"+kathigites[0].getName()+",in:"+mathimata[4].getTitle()+",for:"+foitites[1].getName()+",Grade:"+6.2);
         grammateia.getAitiseis().add("from:"+kathigites[0].getName()+",in:"+mathimata[4].getTitle()+",for:"+foitites[2].getName()+",Grade:"+9.1);
@@ -161,12 +180,20 @@ public class Main extends Application {
         GrammateiaMainController grammCntrl = grammateiaMain.getController();
         grammCntrl.getYpobolhButton().setOnAction(e ->{
             String selectedAitisi = grammCntrl.getAitiseisView().getSelectionModel().getSelectedItem();
-            String[] firstSplit = selectedAitisi.split(",");
-            String [] in = firstSplit[1].split(":");
-            //grammateia.getCorrectiveGrade();
+            String [] firstSplit = selectedAitisi.split(",");
+            String [] onomaFoititi =  firstSplit[2].split(":");
+            String [] onomaMathimatos = firstSplit[1].split(":");
+            String [] grades = firstSplit[3].split(":");
+            float newGrade = Float.parseFloat(grades[1]);
+            //System.out.println(onomaFoititi[1]+","+onomaMathimatos[1]);
+            Mathima diorthMathima = findMathimaFromList(onomaMathimatos[1],mathimataList);
+            Dilosi diotrhDilosi = findDilosiFromList(onomaFoititi[1], diloseisList);
 
-            //Θελει λιγο κωδικα ακομα για να δουλεψει με το UI
+            //if(diorthMathima != null && diotrhDilosi != null)   System.out.println(diotrhDilosi.getFoititis()+"\nΝΕΟΣ ΒΑΘΜΟΣ\n"+diorthMathima.getTitle()+":"+newGrade);
 
+            grammateia.getCorrectiveGrade(diorthMathima,diotrhDilosi,newGrade);
+            grammCntrl.getNewGradeSaved().setText("O neos bathmos "+newGrade+" tou foititi "
+                    +diotrhDilosi.getFoititis().getName()+" sto mathima "+diorthMathima.getTitle()+" apothikeutike!");
         });
 
 
@@ -182,10 +209,14 @@ public class Main extends Application {
 
 
 
+
+
         // block kwdika gia na kleisei h efarmogh
         window.setTitle("Pithia");
         window.setScene(loginScene);
         window.show();
+
+
 
 
     }
@@ -220,7 +251,32 @@ public class Main extends Application {
 
     }
 
+    private Dilosi findDilosiFromList(String  onomaFoititi ,ArrayList<Dilosi> diloseisList){
+        Dilosi diorthDilosi = null;
+        for(Dilosi d : diloseisList){
+            if(d.getFoititis().getName().equals(onomaFoititi)){
+                diorthDilosi = d ;
+                //System.out.println(diorthDilosi.getFoititis());
+                break;
+            }
+        }
 
+        //System.out.println(diorthDilosi.getFoititis());
+        return  diorthDilosi;
+    }
+
+    private Mathima findMathimaFromList(String  titlosMathimatos,ArrayList<Mathima> mathimataList) {
+        Mathima diorthMathima = null;
+        for(Mathima m : mathimataList){
+            if(m.getTitle().equals(titlosMathimatos)){
+                diorthMathima = m ;
+                //System.out.println(diorthMathima.getTitle());
+            }
+        }
+
+        //System.out.println(diorthMathima.getTitle());
+        return  diorthMathima;
+    }
 
 
 }

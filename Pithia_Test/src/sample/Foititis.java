@@ -12,6 +12,9 @@ public class Foititis {
         this.email = email;
     }
 
+    public Foititis(){}
+
+
 
     public int getAM() {
         return AM;
@@ -36,4 +39,13 @@ public class Foititis {
     public void setEmail(String email) {
         this.email = email;
     }
+
+    public String toString(){
+        return this.name+","+this.AM+","+this.email;
+    }
+
+
+
+
+
 }

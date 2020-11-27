@@ -19,6 +19,8 @@ public class Dilosi {
         this.foititis = foititis;
     }
 
+    public Dilosi(){}
+
 
     // alaksa auto pou epistrefei h getCourses
     public ArrayList<String> getCoures(){
@@ -48,6 +50,7 @@ public class Dilosi {
 
     public void setIndexVathmos(float newGrade,int i){this.vathmos[i] = newGrade;}
 
+    public float getIndexVathmos(int i ){ return vathmos[i];}
 
     public Foititis getFoititis() {
         return foititis;
@@ -55,5 +58,10 @@ public class Dilosi {
 
     public void setFoititis(Foititis foititis) {
         this.foititis = foititis;
+    }
+
+
+    public String toString(){
+        return this.foititis.toString() +"\n"+this.mathimata.toString()+this.vathmos.toString();
     }
 }
