@@ -12,7 +12,7 @@ public class Main extends Application {
 
 
     Stage window;
-    Scene loginScene,kathigitisScene,kathigitisCorrectGradeScene,grammateiaMainScene;
+    Scene loginScene,kathigitisScene,kathigitisCorrectGradeScene,grammateiaMainScene,studentMainScene,studentSignedScene;
 
 
     // ΒΟΗΘΗΤΙΚΕΣ ΜΕΤΑΒΛΗΤΕΣ
@@ -65,11 +65,11 @@ public class Main extends Application {
      float[]  vathmoi_null = {0,0,0,0,0,0};
 
     Dilosi [] diloseis = {
-            new Dilosi(foitites[0],mathimata,'9', vathmoi),
-            new Dilosi(foitites[1],mathimata,'7', vathmoi),
-            new Dilosi(foitites[2],mathimata,'7',vathmoi ),
-            new Dilosi(foitites[3],mathimata,'7',vathmoi ),
-            new Dilosi(foitites[4],mathimata,'5',vathmoi_null)
+            new Dilosi(foitites[0],mathimata,'X', vathmoi),
+            new Dilosi(foitites[1],mathimata,'X', vathmoi),
+            new Dilosi(foitites[2],mathimata,'X',vathmoi ),
+            new Dilosi(foitites[3],mathimata,'X',vathmoi ),
+            new Dilosi(foitites[4],mathimata,'X',vathmoi_null),
     };
 
     // END OF DATA
@@ -122,6 +122,15 @@ public class Main extends Application {
         Parent kathiCorrectGradeRoot = kathigitisCorrectGrade.load();
         kathigitisCorrectGradeScene = new Scene(kathiCorrectGradeRoot);
 
+        //load student main page
+        FXMLLoader studentMain = new FXMLLoader(getClass().getResource("studentsMain.fxml"));
+        Parent studentMainRoot = studentMain.load();
+        studentMainScene = new Scene(studentMainRoot);
+
+        //load student us3
+        FXMLLoader studentSigned = new FXMLLoader(getClass().getResource("studentSigned.fxml"));
+        Parent studentSignedRoot = studentSigned.load();
+        studentSignedScene = new Scene(studentSignedRoot);
 
 
 
@@ -137,6 +146,39 @@ public class Main extends Application {
                 populateGrammateiaMain(grammCntrl,grammateia.getName());
             }
         });
+
+
+
+        // Ylopoihsh 3ou userstory
+        // --  login sto susthma otan einai foithths
+        mainCntrl.getStudentButton().setOnAction(e ->{
+            window.setScene(studentMainScene);
+        });
+
+        StudentsMainController studentMainCntrl = studentMain.getController();
+        studentMainCntrl.getStudentSignIn().setOnAction(e ->{
+            int am =Integer.parseInt( studentMainCntrl.getInputAM().getText());
+            Foititis signedStudent = new Foititis();
+            for(Foititis f : foitites){
+                if(am == f.getAM()){
+                    signedStudent = f;
+                    break;
+                }
+            }
+            if(signedStudent!=null){
+                window.setScene(studentSignedScene);
+                StudentSignedController studentSigneInCntrl = studentSigned.getController();
+                studentSigneInCntrl.getStudentMessage().setText("Welcome to Pithia "+signedStudent.getName() );
+                for(Dilosi d : diloseisList){
+                    if(d.getFoititis() == signedStudent){
+                        for(int i=0 ; i<d.mathimata.length ; i++){
+                            studentSigneInCntrl.getDilosiView().getItems().add(d.mathimata[i].getTitle());
+                        }
+                    }
+                }
+            }
+        });
+
 
 
         // ΥΛΟΠΟΙΗΣΗ ΤΟΥ findFoititi
